@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BakeAide</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="steps">Steps</string>
+    <string name="previous">Prev</string>
+    <string name="next">Next</string>
+    <string name="serves">Serves:</string>
+    <string name="no_internet_access">Unable to load Recipes. Please check that you have internet access.</string>
+</resources>
