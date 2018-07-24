@@ -29,25 +29,29 @@ public class BasicUiTest {
 
     }
 
-    @Test
-    public void checkFragmentContainerIsDisplayedTest(){
-        Espresso.onView(ViewMatchers.withId(R.id.portrait_fragment_container)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
-    }
 
     @Test
     public void checkToolbarShowsTitleTest(){
-        Espresso.onView(ViewMatchers.withText(R.string.app_name)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withText(R.string.app_name))
+                .check(ViewAssertions
+                        .matches(ViewMatchers.isDisplayed()));
     }
 
     @Test
     public void checkRecyclerViewIsDisplayed() {
-        Espresso.onView(ViewMatchers.withId(R.id.rv_recipe_list)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withId(R.id.rv_recipe_list))
+                .check(ViewAssertions
+                        .matches(ViewMatchers.isDisplayed()));
     }
 
     @Test
     public void checkClickingRecyclerViewOpensOverview(){
-        Espresso.onView(ViewMatchers.withText("Cheesecake")).perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withText("Ingredients")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(ViewMatchers.withText("Nutella Pie"))
+                .perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withId(R.id.tv_ingredients_header))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+
+
     }
 
 }

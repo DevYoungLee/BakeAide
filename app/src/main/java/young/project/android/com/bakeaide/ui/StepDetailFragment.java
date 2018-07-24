@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
@@ -34,6 +36,9 @@ import young.project.android.com.bakeaide.domain.model.Recipe;
 import young.project.android.com.bakeaide.view_model.SharedViewModel;
 
 public class StepDetailFragment extends Fragment{
+
+    private final String PLAYER_POSITION_KEY = "player_position_key";
+
     private SharedViewModel mSharedViewModel;
     private TextView mStepDescriptionTextView;
     private Button mPrevStepButton;
@@ -44,15 +49,19 @@ public class StepDetailFragment extends Fragment{
     private ActionBar mActionBar;
     private int mRecipePosition;
     private int mStepPosition;
+    private long mPlayerPosition;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_step_detail, container, false);
+        if(savedInstanceState != null){
+            mPlayerPosition = savedInstanceState.getLong(PLAYER_POSITION_KEY);
+        }
         if(getArguments() != null) {
             mRecipePosition = getArguments().getInt(MainActivity.EXTRA_RECIPE_ID_KEY);
             mStepPosition = getArguments().getInt(MainActivity.EXTRA_STEP_ID_KEY);
         }
+        View view = inflater.inflate(R.layout.fragment_step_detail, container, false);
         mFragmentChangeListener = (MainActivity) getActivity();
         mStepDescriptionTextView = view.findViewById(R.id.tv_step_detail_description);
         mPrevStepButton = view.findViewById(R.id.b_prev);
@@ -154,17 +163,33 @@ public class StepDetailFragment extends Fragment{
             MediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFacory)
                     .createMediaSource(uri);
             mPlayer.prepare(mediaSource);
+            if(mPlayerPosition != C.TIME_UNSET){
+                mPlayer.seekTo(mPlayerPosition);
+
+            }
+            mPlayer.setPlayWhenReady(true);
 
     }
 
+    @Override
+    public void onResume() {
+
+        super.onResume();
+    }
 
     @Override
     public void onPause() {
         if(mPlayer != null) {
             mPlayer.release();
+            mPlayerPosition = mPlayer.getCurrentPosition();
         }
         super.onPause();
 
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong(PLAYER_POSITION_KEY, mPlayerPosition);
+    }
 }
