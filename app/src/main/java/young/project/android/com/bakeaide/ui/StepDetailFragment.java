@@ -38,6 +38,7 @@ import young.project.android.com.bakeaide.view_model.SharedViewModel;
 public class StepDetailFragment extends Fragment{
 
     private final String PLAYER_POSITION_KEY = "player_position_key";
+    private final String PLAYER_PLAY_WHEN_READY_KEY = "player_play_when_ready_key";
 
     private SharedViewModel mSharedViewModel;
     private TextView mStepDescriptionTextView;
@@ -50,12 +51,14 @@ public class StepDetailFragment extends Fragment{
     private int mRecipePosition;
     private int mStepPosition;
     private long mPlayerPosition;
+    private boolean mPlayerIsPlayWhenReady;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         if(savedInstanceState != null){
             mPlayerPosition = savedInstanceState.getLong(PLAYER_POSITION_KEY);
+            mPlayerIsPlayWhenReady = savedInstanceState.getBoolean(PLAYER_PLAY_WHEN_READY_KEY);
         }
         if(getArguments() != null) {
             mRecipePosition = getArguments().getInt(MainActivity.EXTRA_RECIPE_ID_KEY);
@@ -73,6 +76,8 @@ public class StepDetailFragment extends Fragment{
 
     private void connectActionBar(List<Recipe> recipeList){
         mActionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setDisplayHomeAsUpEnabled(true);
 
         if(!getResources().getBoolean(R.bool.isTablet)) {
             mActionBar.setTitle(recipeList.get(mRecipePosition).getSteps().get(mStepPosition).getShortDescription());
@@ -167,7 +172,7 @@ public class StepDetailFragment extends Fragment{
                 mPlayer.seekTo(mPlayerPosition);
 
             }
-            mPlayer.setPlayWhenReady(true);
+            mPlayer.setPlayWhenReady(mPlayerIsPlayWhenReady);
 
     }
 
@@ -182,6 +187,7 @@ public class StepDetailFragment extends Fragment{
         if(mPlayer != null) {
             mPlayer.release();
             mPlayerPosition = mPlayer.getCurrentPosition();
+            mPlayerIsPlayWhenReady = mPlayer.getPlayWhenReady();
         }
         super.onPause();
 
@@ -191,5 +197,6 @@ public class StepDetailFragment extends Fragment{
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putLong(PLAYER_POSITION_KEY, mPlayerPosition);
+        outState.putBoolean(PLAYER_PLAY_WHEN_READY_KEY, mPlayerIsPlayWhenReady);
     }
 }

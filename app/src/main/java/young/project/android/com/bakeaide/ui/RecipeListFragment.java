@@ -40,6 +40,8 @@ public class RecipeListFragment extends Fragment {
     private void connectActionBar(){
         mActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         mActionBar.setTitle(R.string.app_name);
+        mActionBar.setDisplayShowHomeEnabled(true);
+        mActionBar.setDisplayHomeAsUpEnabled(false);
 
     }
 

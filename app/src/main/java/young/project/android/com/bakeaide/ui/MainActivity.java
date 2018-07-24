@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 
 import young.project.android.com.bakeaide.R;
 
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements FragmentChangeLis
         Toolbar mToolbar = findViewById(R.id.tb_main_activity);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (!isTablet) {
 
@@ -94,6 +97,14 @@ public class MainActivity extends AppCompatActivity implements FragmentChangeLis
                     .addToBackStack(tag)
                     .commit();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return false;
     }
 
     @Override

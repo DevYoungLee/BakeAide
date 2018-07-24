@@ -52,6 +52,8 @@ public class RecipeOverviewFragment extends Fragment {
     private void connectActionBar(List<Recipe> recipeList){
         mActionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         mActionBar.setTitle(recipeList.get(mRecipePosition).getName());
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     private void connectViewModel(){
