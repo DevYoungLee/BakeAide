@@ -25,5 +25,5 @@ The widget of the application allows viewing of the ingredients: <br />
 A single activity with multiple fragments allow for flexible UI for tablets: <br />
 ![alt text](screenshots/detail_tablet.png "Tablet UI") <br />
 <br />
+Thank you for reading! <br />
 Any suggestions will be greatly appreciated!
-
