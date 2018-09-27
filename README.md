@@ -1,5 +1,5 @@
 # BakeAide
-BakeAide is an android application written in java that details recipe instructions for baked goods.<br >
+BakeAide is an android application written in Java that details recipe instructions for baked goods.<br >
 <br >
 The application follows an MVVM architecture <br />
 A single activity pattern is used for flexible UI. <br />
