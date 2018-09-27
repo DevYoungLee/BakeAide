@@ -14,7 +14,7 @@ The main screen of the application shows available recipes: <br />
 <br />
 Clicking on an item shows its ingredients and the overview of the steps: <br />
 ![alt text](screenshots/detail_screen_top.png "Detail Screen Top") <br />
-![alt text](screenshots/detail_screen_buttom.png "Detail Screen Bottom") <br />
+![alt text](screenshots/detail_screen_bottom.png "Detail Screen Bottom") <br />
 <br />
 Clicking on a recipe step shows detailed information about the step including a video: <br /> 
 ![alt text](screenshots/step_detail.png "Step detail") <br />
