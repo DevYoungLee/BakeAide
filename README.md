@@ -1,5 +1,4 @@
 # BakeAide
-Simple Baking Recipe Instructions App
 BakeAide is an android application written in java that details recipe instructions for baked goods.<br >
 <br >
 The application follows an MVVM architecture <br >
